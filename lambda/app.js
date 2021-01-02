@@ -1,14 +1,20 @@
-const puppeteer = require('puppeteer-core');
+// const puppeteer = require('puppeteer-core');
+const puppeteer = require('puppeteer');
 const sharp = require('sharp');
 
 exports.lambdaHandler = async (event) => {
 
     const browser = await puppeteer.launch({
         headless: true,
-        executablePath: '/usr/bin/google-chrome-stable',
+        // executablePath: '/usr/bin/google-chrome-stable',
         args: [
             '--no-sandbox',
-            '--disable-setuid-sandbox'
+            '--disable-setuid-sandbox',
+            '-–disable-dev-shm-usage',
+            '--disable-gpu',
+            '--no-first-run',
+            '--no-zygote',
+            '--single-process',
         ]
     });
     const page = await browser.newPage();
